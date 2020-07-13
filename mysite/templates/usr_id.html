@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}homepage1 {% endblock %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mysite/index.css' %}">
+{% block content %}
+
+    <div class='container '>
+      {% for post in usr_posts %}
+
+            <div class="post card col-sm">
+              <div class="card-body">
+                <h5 class="card-header border mb-3 border-primary">
+                      {{ post.title }}
+                </h5>
+                <pre class='card-text'>{{ post.body }} </pre>
+
+                <p class='card-text'><small class='text-muted'> Author:{{ post.author}}  </small></p>
+                <p class='card-text'><small class='text-muted'>{{post.last_modified}}</small></p>
+                </div>
+            </div>
+        {% endfor %}
+      </div>
+{% endblock %}

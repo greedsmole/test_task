@@ -1,0 +1,33 @@
+class updatePostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','body','is_public']
+        widgets= {
+        'body' : Textarea()
+        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-exampleForm'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit'
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+
+
+
+        def updatepost(request,post_id):
+            post = get_object_or_404(Post,pk=post_id)
+            if request.method == 'POST':
+                form = updatePostForm(Post)
+                if form.is_valid():
+                    post = form.save(commit=False)
+                    post.title = form.cleaned_data['title']
+                    post.body = form.cleaned_data['body']
+                    post.last_modified = datetime.date.today()
+                    post.save()
+                    return HttpResponseRedirect("/profile/")
+            else:
+                form = updatePostForm()
+            return render(request,'post_update.html',{'form':form})

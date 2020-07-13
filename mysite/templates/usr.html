@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Users {% endblock %}
+{% block content %}
+
+
+<div class="container">
+  {% for u in users %}
+
+              <div class="post card col-sm">
+                <div class="card-body">
+                  <h5 class="card-text ">
+                        {{ u.username }}
+                  </h5>
+                  <div class="card-text">
+                    <a href="{{ u.id }}"> {{ u.id }}</a>
+                  </div>
+              </div>
+              </div>
+
+
+  {% endfor %}
+</div>
+
+
+
+
+
+{% endblock %}

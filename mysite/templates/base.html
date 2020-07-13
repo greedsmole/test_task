@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+  crossorigin="anonymous"></script>
+  <title>{% block title %}Local blog{% endblock %}</title>
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'index.css'%}">
+</head>
+<body style="padding-top:5rem">
+  {% block sidebar %}
+  <div class="container-fluid">
+    <nav class="navbar row justify-content-center fixed-top navbar-expand-lg bg-light navbar-light">
+    <span class="border-primary">
+
+      <ul class="nav mt-2">
+        <li class="nav-item"> <a class="nav-link" href="{% url 'index' %}">Home</a> </li>
+        {% if not user.is_authenticated %}
+        <li class="nav-item"> <a class="nav-link" href="{% url 'login' %}">Login</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{% url 'signup' %}">Registration</a> </li>
+        {% else %}
+        <li class="nav-item"> <a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{% url 'userprofile' %}">Profile</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="{% url 'usr_index' %}">Users</a> </li>
+        {% endif %}
+
+      </ol>
+    </span>
+  </nav>
+  </div>
+
+  <!-- <div class='container-fluid'>
+    <nav class='row'>
+      <ol class='breadcrumb'>
+    <li class="breadcrumb-item"><a class='col-sm' href="/homepage/">home</a></li>
+    <a class='col-sm' href="/login/">login</a>
+    <a class='col-sm' href="/registration/">registration</a>
+    <a class='col-sm' href="/profile/">profile</a>
+    <a class='col-sm' href="/usr/">users</a>
+    </nav>
+  </ol>
+  </div> -->
+
+
+  {% endblock %}
+  {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+</body>
+</html>
